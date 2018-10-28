@@ -11,11 +11,16 @@ window.onload = function (event) {
 
         request.onreadystatechange = function () {
             if (request.readyState == '4' && request.status == '200'){
-                console.log(request.responseText);
+                if (request.responseText == 'yes'){
+                    location = '/users';
+                }
+                else if (request.responseText == 'no'){
+                    alert('Error!');
+                }
             }
         }
 
-        request.open('POST', '../../controllers/ValidLogin.php');
+        request.open('POST', '/login/valid');
         request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         request.send("email="+email.value+'&'+"password="+password.value);
     }

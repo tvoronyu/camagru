@@ -17,7 +17,7 @@ class Users
 
         $db = $dbConnect->dbCon();
 
-        $result = $db->query('SELECT `id_user` , `login_user`, `pic_user` FROM `users` WHERE 1');
+        $result = $db->query('SELECT `id_user` , `name_user`,`sename_user`, `pic_user` FROM `users` WHERE 1');
 
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -58,6 +58,25 @@ class Users
             echo "error";
             return false;
         }
+    }
+
+    public static function setUser(){
+        $dbPath = ROOT."/template/dbConnect.php";
+        include_once $dbPath;
+
+        $dbConnect = new dbConnect();
+
+        $db = $dbConnect->dbCon();
+
+        $name = $_POST['name'];
+        $login = $_POST['email'];
+        $sername = $_POST['sername'];
+        $password = $_POST['password'];
+
+//        $result = $db->query("INSERT INTO users(login_user) VALUE ('$name')");
+
+        $result = $db->query("INSERT INTO users( password_user, login_user, name_user, sename_user) VALUES ('$password','$login','$name','$sername')");
+//        echo var_dump($name);
     }
 
     public static function delUserId($user_id){

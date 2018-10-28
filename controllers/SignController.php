@@ -13,4 +13,13 @@ class SignController
         include_once ROOT.'/views/signup/index.php';
         return true;
     }
+
+    public function actionSignupvalid()
+    {
+        include_once ROOT.'/models/Users.php';
+
+        Users::setUser();
+
+        return true;
+    }
 }

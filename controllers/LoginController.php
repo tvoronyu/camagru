@@ -13,4 +13,23 @@ class LoginController
         include_once ROOT.'/views/login/index.php';
         return true;
     }
+
+    public function actionLoginvalid(){
+        include_once ROOT.'/models/Users.php';
+
+        $result = Users::getUsersLogin();
+
+        while ($row = $result->fetch()){
+//            echo print_r($row);
+//            echo print_r($_POST);
+            if ($row['login_user'] == $_POST['email']){
+                if ($row['password_user'] == $_POST['password']){
+                    echo 'yes';
+                    return true;
+                }
+            }
+        }
+        echo 'no';
+        return true;
+    }
 }

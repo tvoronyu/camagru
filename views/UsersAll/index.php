@@ -14,7 +14,7 @@ include_once ROOT . '/template/php/header.php';
         <?php foreach ($listUsers as $index){
             echo "
             <div class='col border rounded p-5'><div class='d-flex justify-content-center'><img src='http://media.pn.am/media/issue/197/297/photo/197297.jpg ' alt='user_photo'></div>
-            <div><p class='p-3 mt-2 d-flex justify-content-center'>{$index['login_user']}</p>
+            <div><p class='p-3 mt-2 d-flex justify-content-center'>{$index['name_user']} {$index['sename_user']}</p>
             </div>
             </div>
             ";

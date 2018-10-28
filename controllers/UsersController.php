@@ -26,7 +26,7 @@ class UsersController
 //            include_once ROOT.'/controllers/UsersAllView.php';
 
 //            UsersAllView::usersAllView($listUsers);
-            echo ROOT.'/views/UsersAll/index.php';
+//            echo ROOT.'/views/UsersAll/index.php';
             return $listUsers;
         }
         return true;
@@ -40,8 +40,8 @@ class UsersController
             if (!$row){
                 return $this->actionUsersAll();
             }
-            echo "<pre>";
-            print_r($row);
+//            echo "<pre>";
+//            print_r($row);
             return $row;
         }
         return true;
