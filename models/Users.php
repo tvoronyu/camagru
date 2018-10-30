@@ -33,7 +33,7 @@ class Users
 
         $db = $dbConnect->dbCon();
 
-        $result = $db->query('SELECT `login_user` , `password_user` FROM `users`');
+        $result = $db->query('SELECT `login_user` ,`id_user`, `password_user` FROM `users`');
 
         $result->setFetchMode(PDO::FETCH_ASSOC);
 
@@ -48,7 +48,7 @@ class Users
 
         $db = $dbConnect->dbCon();
 
-        $result = $db->query('SELECT `id_user`, `login_user`, `pic_user` FROM `users` WHERE `id_user` IN ('.$user_id.')');
+        $result = $db->query('SELECT `id_user`, `login_user`,`name_user`, `sename_user`, `pic_user` FROM `users` WHERE `id_user` IN ('.$user_id.')');
 
         if ($result) {
             $result->setFetchMode(PDO::FETCH_ASSOC);

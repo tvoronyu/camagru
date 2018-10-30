@@ -37,7 +37,6 @@ class Router
     public function run()
     {
         //Получить строку запроса
-
         $uri = $this->getURI();
         if ($uri == ''){
             include_once ROOT."/views/main/index.php";
@@ -45,7 +44,6 @@ class Router
         else {
 
             //Проверить наличие такого запроса в routes.php
-
 
             foreach ($this->routes as $uriPattern => $path) {
 
@@ -85,7 +83,9 @@ class Router
 //                 print_r($segment);
 
                     $controllerObject = new $controllerName;
+//                    echo "1234";
                     $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+//                    echo "12";
                     if ($result != null) {
 //                     echo "<pre>";
 //                     print_r($result);
@@ -95,6 +95,10 @@ class Router
                 }
 
             }
+//            var_dump($result);
+//            if (!$result){
+//                header("location: /");
+//            }
         }
 
 

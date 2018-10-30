@@ -40,9 +40,8 @@ class UsersController
             if (!$row){
                 return $this->actionUsersAll();
             }
-//            echo "<pre>";
-//            print_r($row);
-            return $row;
+            $var = $row;
+            include_once ROOT.'/views/cabinet/index.php';
         }
         return true;
     }

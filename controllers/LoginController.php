@@ -14,6 +14,14 @@ class LoginController
         return true;
     }
 
+    public function actionLogout()
+    {
+        $_SESSION['login'] = '';
+        $_SESSION['id'] = '';
+        header('Location:/login');
+        return true;
+    }
+
     public function actionLoginvalid(){
         include_once ROOT.'/models/Users.php';
 
@@ -25,6 +33,9 @@ class LoginController
             if ($row['login_user'] == $_POST['email']){
                 if ($row['password_user'] == $_POST['password']){
                     echo 'yes';
+                    $_SESSION['login'] = $row['login_user'];
+                    $_SESSION['id'] = $row['id_user'];
+//                    var_dump($row);
                     return true;
                 }
             }
