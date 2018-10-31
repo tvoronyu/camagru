@@ -18,7 +18,11 @@ include_once ROOT.'/template/php/header.php';
                 <div class="row h-100">
                     <div class="col d-flex justify-content-center align-items-center">
                         <div class="flex-column">
-                            <div><video id="video" style="width: 100%; height: 50%" src="" autoplay></video></div>
+                            <div><video id="video" style="display: none; width: 1024px; height: 720px" src="" autoplay></video></div>
+                            <div>
+                                <img style="width: 300px; height: auto; margin: 10px" id="img-video" src="" alt="">
+                                <img style="width: 300px; height: auto;" src="/template/img/user.jpg" id="filter-image" alt="">
+<!--                                <video id="video_1" style="width: 640px; height: 480px" src="" autoplay></video></div>-->
                             <div class="container">
                                 <div class="row">
                                     <button id="button" class="btn btn-info btn-block">chees...</button>
@@ -29,6 +33,16 @@ include_once ROOT.'/template/php/header.php';
                                     <button id="newphoto" class="btn btn-success mt-2 btn-block">new photo</button>
                                 </div>
                             </div>
+                                <div id="fountainTextG" style="position: absolute;display: none;">
+                                    <div id="fountainTextG_1" class="fountainTextG">З</div>
+                                    <div id="fountainTextG_2" class="fountainTextG">а</div>
+                                    <div id="fountainTextG_3" class="fountainTextG">г</div>
+                                    <div id="fountainTextG_4" class="fountainTextG">р</div>
+                                    <div id="fountainTextG_5" class="fountainTextG">у</div>
+                                    <div id="fountainTextG_6" class="fountainTextG">з</div>
+                                    <div id="fountainTextG_7" class="fountainTextG">к</div>
+                                    <div id="fountainTextG_8" class="fountainTextG">а</div>
+                                </div>
                         </div>
                     </div>
 
@@ -55,7 +69,7 @@ include_once ROOT.'/template/php/header.php';
         </div>
     </div>
 </div>
-<canvas id="canvas" style="display: none; width: 640px;height: 480px;"></canvas>
+<canvas id="canvas" style="display: none; width: 1024px;height: 720px;"></canvas>
 <script src="/template/js/camera.js" type="text/javascript"></script>
 <?php
 include_once ROOT.'/template/php/footer.php';

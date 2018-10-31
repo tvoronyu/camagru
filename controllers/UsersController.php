@@ -43,6 +43,9 @@ class UsersController
             $var = $row;
             include_once ROOT.'/views/cabinet/index.php';
         }
+        echo "<pre>";
+        print_r($row);
+//        echo $test;
         return true;
     }
 

@@ -54,4 +54,44 @@ class CameraController
         echo $string;
         return true;
     }
+
+    public function actionGetPhoto()
+    {
+        $image = file_get_contents(ROOT.'/imgUsers/src.jpg');
+
+        $tmp_2 = imagecreatefromstring($image);
+
+        if ($_POST['filter'] == '7')
+            for ($i = 0; $i < 30; $i++) {
+
+                imagefilter($tmp_2, IMG_FILTER_GAUSSIAN_BLUR);
+                imagefilter($tmp_2, '1');
+            }
+        else if($_POST['filter'] == '17') {
+            for ($i = 0; $i < 30; $i++) {
+
+                imagefilter($tmp_2, IMG_FILTER_GAUSSIAN_BLUR);
+            }
+        }
+        else if($_POST['filter'] == 'sepia') {
+            imagefilter($tmp_2, IMG_FILTER_COLORIZE, 112, 66,20);
+//            imagefilter($tmp_2, IMG_FILTER_BRIGHTNESS, -200);
+//            imagefilter($tmp_2, IMG_FILTER_GRAYSCALE);
+//            imagefilter($tmp_2, IMG_FILTER_CONTRAST, 200);
+        }
+        else{
+            imagefilter($tmp_2, $_POST['filter']);
+        }
+
+        imagejpeg($tmp_2, ROOT.'/imgUsers/image.jpg', 100);
+        imagedestroy($tmp_2);
+        if ($file = file_get_contents(ROOT.'/imgUsers/image.jpg')) {
+                $temp = base64_encode($file);
+                echo urlencode($temp);
+            }
+
+//            echo "fdf";
+
+        return true;
+    }
 }

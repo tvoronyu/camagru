@@ -38,6 +38,8 @@ class Router
     {
         //Получить строку запроса
         $uri = $this->getURI();
+//        echo "<pre>";
+//        print_r($_SERVER);
         if ($uri == ''){
             include_once ROOT."/views/main/index.php";
         }
