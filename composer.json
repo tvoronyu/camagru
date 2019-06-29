@@ -1,0 +1,21 @@
+{
+    "name": "taras/htdocs",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Components\\": "components/"
+        },
+        "files": [
+            "index.php",
+            "app/Controllers/Controller.php"
+        ]
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

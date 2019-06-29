@@ -5,6 +5,9 @@
  * Date: 10/27/18
  * Time: 4:09 PM
  */
+namespace Components;
+
+use App\Controllers\Misc\Misc as app;
 
 class Router
 {
@@ -15,11 +18,6 @@ class Router
     {
         $routesPath = ROOT.'/config/routes.php';
         $this->routes = include ($routesPath);
-
-//        if (!$_COOKIE['camagru'])
-//            setcookie('camagru', 'taras');
-
-//        var_dump($cookie);
     }
 
 
@@ -30,81 +28,62 @@ class Router
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])){
-            return trim($_SERVER['REQUEST_URI'], '/');
+            return trim(explode("?",trim($_SERVER['REQUEST_URI'], '/'))[0],'/');
         }
     }
 
-    public function run()
-    {
-        //Получить строку запроса
+    public function run(){
+//        Получить строку запроса
         $uri = $this->getURI();
-//        echo "<pre>";
-//        print_r($_SERVER);
-        if ($uri == ''){
-            include_once ROOT."/views/main/index.php";
+
+        $routers = include __DIR__."/../config/routes.php";
+
+        if (in_array($uri, array_keys($routers))){
+
+            $getRequestMethod = explode('|', $routers[$uri]);
+
+            if ($getRequestMethod[0] != $_SERVER['REQUEST_METHOD'])
+                app::trace("Method Error");
+
+            $routers[$uri] = $getRequestMethod[1];
+
+            $parseCallClass = explode("@",$routers[$uri]);
+
+            $path = explode('/', $parseCallClass[0]);
+
+            $className = array_pop($path);
+
+            $pathClass = $path[0];
+
+            $methodName = $parseCallClass[1];
+
+            $controllerFile = ROOT . "/app/Controllers/".$pathClass."/".$className.".php";
+
+            if (file_exists($controllerFile)) {
+                include_once $controllerFile;
+            }
+            else{
+                app::trace("404");
+            }
+
+            $fullNameSpace = "App\Controllers\\$pathClass\\$className";
+
+            $obj = $this->getClassObject($fullNameSpace);
+
+            $obj->$methodName();
+
         }
         else {
-
-            //Проверить наличие такого запроса в routes.php
-
-            foreach ($this->routes as $uriPattern => $path) {
-
-                if (preg_match("~$uriPattern~", $uri)) {
-                    //Если есть совпадение, определить какой контроллер
-                    //и action обрабатывает запрос
-                    $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-
-                    //определить контролер и action
-
-                    $segment = explode('/', $internalRoute);
-
-                    $controllerName = array_shift($segment) . "Controller";
-                    $controllerName = ucfirst($controllerName);
-
-                    $actionName = "action" . ucfirst(array_shift($segment));
-
-////
-//                echo $controllerName."<br>";
-//                echo $actionName;
-
-                    //Подключить файл класса-контроллера
-                    $parameters = $segment;
-//
-//                echo "<pre>";
-//                print_r($segment);
-
-                    $controllerFile = ROOT . '/controllers/' . $controllerName . ".php";
-//                echo $controllerFile;
-
-
-                    if (file_exists($controllerFile)) {
-//                     echo "test";
-                        include_once $controllerFile;
-                    }
-
-//                 print_r($segment);
-
-                    $controllerObject = new $controllerName;
-//                    echo "1234";
-                    $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-//                    echo "12";
-                    if ($result != null) {
-//                     echo "<pre>";
-//                     print_r($result);
-//                     echo "test";
-                        break;
-                    }
-                }
-
-            }
-//            var_dump($result);
-//            if (!$result){
-//                header("location: /");
-//            }
+            app::trace("404");
+            header("Location:signup");
         }
+    }
 
+    private function getClassObject($fullNameSpace){
+        $class = [
+            'App\Controllers\Auth\Signup' => \App\Controllers\Auth\Signup::class,
+        ];
 
-        //Создать объектб вызвать метод (т.е. action)
-
+        return new $class[$fullNameSpace];
     }
 }
