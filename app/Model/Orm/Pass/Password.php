@@ -1,21 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: taras
- * Date: 2019-06-29
- * Time: 16:11
+ * User: Taras
+ * Date: 30.06.2019
+ * Time: 21:53
  */
 
-namespace App\Model\Orm\User;
+namespace App\Model\Orm\Pass;
 
-use App\Controllers\Misc\Misc;
 use App\Model\Logic\DB;
 use App\Model\Model;
-use App\Interfaces\Model\User as UserInterface;
 
-class User extends Model implements UserInterface
+class Password extends Model
 {
-    static public $table = "users";
+    static public $table = "passwords";
 
     static public function update($update, $where)
     {

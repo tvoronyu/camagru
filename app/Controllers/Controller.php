@@ -28,7 +28,8 @@ class Controller extends FrontController
             $this->request = json_decode($inputJSON, TRUE);
         }
 
-        (new Clear())->handle($this->request);
+        if (is_array($this->request))
+            (new Clear())->handle($this->request);
 
         $this->validator = new Validate();
     }

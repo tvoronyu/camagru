@@ -1,21 +1,19 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: taras
- * Date: 2019-06-29
- * Time: 16:11
+ * User: Taras
+ * Date: 30.06.2019
+ * Time: 21:50
  */
 
-namespace App\Model\Orm\User;
+namespace App\Model\Orm\PreReg;
 
-use App\Controllers\Misc\Misc;
 use App\Model\Logic\DB;
 use App\Model\Model;
-use App\Interfaces\Model\User as UserInterface;
 
-class User extends Model implements UserInterface
+class PreReg extends Model
 {
-    static public $table = "users";
+    static public $table = "pre_registration";
 
     static public function update($update, $where)
     {
@@ -41,5 +39,4 @@ class User extends Model implements UserInterface
 
         return (new DB())->table(self::$table)->insert($data);
     }
-
 }

@@ -20,22 +20,23 @@
         <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
     </ul>
     <ul class="navbar-nav">
-        <?php if ($_SESSION['login'] != '') :?>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') :?>
             <li class="nav-item"><a href="/camera" class="nav-link">Creat new Photo</a></li>
         <?php endif; ?>
-        <?php if ($_SESSION['login'] == '') :?><li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login'] == '') :?><li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
         <li class="nav-item"><a href="/signup" class="nav-link">SignUp</a></li>
         <?php endif; ?>
+        <li class="nav-item"><a href="/signup" class="nav-link">SignUp</a></li>
 
-        <?php if ($_SESSION['login'] != '') :?>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') :?>
         <li class="nav-item"><a href="/users" class="nav-link">Users</a></li>
         <?php endif; ?>
 
-        <?php if ($_SESSION['login'] != '') : ?>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') : ?>
             <li class="nav-item"><a href="/cabinet" class="nav-link">Cabinet</a></li>
         <?php endif; ?>
 
-        <?php if ($_SESSION['login'] != '') : ?>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login'] != '') : ?>
             <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
         <?php endif; ?>
     </ul>

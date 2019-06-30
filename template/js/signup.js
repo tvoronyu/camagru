@@ -26,13 +26,20 @@ window.onload = function () {
         request.onreadystatechange = function () {
             if (request.readyState == '4' && request.status == '200'){
                 // if (request.responseText == 'yes'){
-                    location = '/login';
+                //     location = '/login';
             //     }
             }
         }
 
-        request.open('POST', '/signup/valid');
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        request.send("email="+email.value+'&'+"password="+password.value+'&'+'name='+name.value+'&'+'sername='+sername.value);
+        var jsn = {
+            "email":email.value,
+            "password":password.value,
+            "name":name.value
+        };
+
+        request.open('POST', '/signup/verify');
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send(JSON.stringify(jsn));
+        // request.send("email="+email.value+'&'+"password="+password.value+'&'+'name='+name.value+'&'+'sername='+sername.value);
     }
 }

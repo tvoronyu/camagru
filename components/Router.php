@@ -8,6 +8,8 @@
 namespace Components;
 
 use App\Controllers\Misc\Misc as app;
+use App\Controllers\Misc\Misc;
+use http\Header;
 
 class Router
 {
@@ -33,7 +35,20 @@ class Router
     }
 
     public function run(){
+        session_start();
 //        Получить строку запроса
+//        app::trace($_SESSION);
+//        unset($_SESSION['account']);
+//        if (!isset($_SESSION['account']) && isset($_SESSION['logout']) && $_SESSION['logout'] == 1)
+//            return include_once ROOT . "/views/main/index.php";
+//        app::trace($_SESSION);
+
+//        if (!isset($_SESSION['account'])) {
+//            $_SESSION['logout'] = 1;
+//
+//            \header("Location:/");
+//        }
+
         $uri = $this->getURI();
 
         $routers = include __DIR__."/../config/routes.php";
@@ -53,12 +68,12 @@ class Router
 
             $className = array_pop($path);
 
-            $pathClass = $path[0];
-
+            $pathClass = implode("/",$path);
+//app::trace($parseCallClass);
             $methodName = $parseCallClass[1];
 
-            $controllerFile = ROOT . "/app/Controllers/".$pathClass."/".$className.".php";
-
+            $controllerFile = ROOT . "/app/".$pathClass."/".$className.".php";
+//Misc::trace($controllerFile);
             if (file_exists($controllerFile)) {
                 include_once $controllerFile;
             }
@@ -66,9 +81,12 @@ class Router
                 app::trace("404");
             }
 
-            $fullNameSpace = "App\Controllers\\$pathClass\\$className";
+            $pathClass = implode("\\",$path);
+            $fullNameSpace = "App\\$pathClass\\$className";
 
             $obj = $this->getClassObject($fullNameSpace);
+
+
 
             $obj->$methodName();
 
@@ -82,6 +100,9 @@ class Router
     private function getClassObject($fullNameSpace){
         $class = [
             'App\Controllers\Auth\Signup' => \App\Controllers\Auth\Signup::class,
+            'App\Views\Signup' => \App\Views\Signup::class,
+            'App\Views\Landing' => \App\Views\Landing::class,
+            'App\Controllers\Auth\VerifyEmail' => \App\Controllers\Auth\VerifyEmail::class,
         ];
 
         return new $class[$fullNameSpace];

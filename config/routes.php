@@ -13,6 +13,9 @@ return array(
 //    'login' => 'login/login',
 //    'logout' => 'login/logout',
 
-        'signup' => 'POST|Auth/Signup@signup'
+        'signup/verify' => 'POST|Controllers/Auth/Signup@signup',
+        'signup' => 'GET|Views/Signup@getSignup',
+        '' => 'GET|Views/Landing@getLanding',
+        'activate' => 'GET|Controllers/Auth/VerifyEmail@verify'
 
 );
