@@ -10,6 +10,7 @@ namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Controllers\Misc\Misc;
+use App\Controllers\Misc\Request;
 use App\Model\Logic\DB;
 use App\Model\Orm\Pass\Password;
 use App\Model\Orm\PreReg\PreReg;
@@ -22,30 +23,22 @@ class Signup extends Controller
         parent::__construct();
     }
 
-    public function signup(){
+    public function signup(Request $request){
 
         /**
          * тут треба написати валідацію
          */
 
-       $email = $this->request['email'];
-       $password = $this->request['password'];
-       $name = $this->request['name'];
+       $email = $request->get('email');
+       $password = $request->get('password');
+       $name = $request->get('name');
+       $sername = $request->get('sername');
 
        $whereUser = [
            'user_email' => $email
        ];
-
-       $user = User::get($whereUser);
-
-       if (!empty($user)){
-           header("Content-Type:application/json");
-           print json_encode([
-               "status" => 0,
-               "msg" => "Email exist"
-           ]);
-           return ;
-       }
+       if (!empty($user = User::get($whereUser)))
+           return ['status'=>0, 'msg'=>"Email exist"];
 
        $passInsert = [
            'pass_user_id' => 0,
@@ -59,6 +52,7 @@ class Signup extends Controller
        $pregInsert = [
            'pre_email' => $email,
            'pre_name' => $name,
+           'pre_sername' => $sername,
            'pre_pass_id' => $passId,
            'pre_unique_code' => $uniqueCode,
            'pre_expire' => time() + 300,
@@ -74,20 +68,11 @@ class Signup extends Controller
        $html = "For active you account, please go this link $link";
 
 
-       $this->sendEmail("taras_voronyuk@ukr.net", "Register You Account", $html);
+       $this->sendEmail($email, "Register You Account", $html);
 
-        header("Content-Type:application/json");
-        print json_encode([
-            "status" => 1,
-            "msg" => "success"
-        ]);
-        return ;
+       return $this->middleResponse();
 
        Misc::trace2(1,$this->request, $uniqueCode, $link);
 
-    }
-
-    private function sendEmail($to, $subject, $msg){
-        mail($to,$subject, $msg);
     }
 }

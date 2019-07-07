@@ -13,9 +13,31 @@ return array(
 //    'login' => 'login/login',
 //    'logout' => 'login/logout',
 
-        'signup/verify' => 'POST|Controllers/Auth/Signup@signup',
-        'signup' => 'GET|Views/Signup@getSignup',
-        '' => 'GET|Views/Landing@getLanding',
-        'activate' => 'GET|Controllers/Auth/VerifyEmail@verify'
 
+        /**
+         * Controller
+         */
+        /** *********************************************** */
+
+        'signup/verify'     => 'POST|Controllers/Auth/Signup@signup',
+        'activate'          => 'GET|Controllers/Auth/VerifyEmail@verify',
+        'login/verify'      => 'POST|Controllers/Auth/Login@login',
+        'logout'            => 'GET|Controllers/Auth/Logout@logout',
+        'forgot/verify'     => 'POST|Controllers/Auth/ForgotPassword@forgotPassword',
+
+        /** *********************************************** */
+
+
+        /**
+         * Views
+         */
+        /** *********************************************** */
+
+        'login'             => 'GET|Views/Login@getLogin',
+        'signup'            => 'GET|Views/Signup@getSignup',
+        'camera'            => 'GET|Views/Camera@getCamera',
+        'forgot'            => 'GET|Views/ForgotPassowrd@getForgot',
+        ''                  => 'GET|Views/Landing@getLanding',
+
+        /** *********************************************** */
 );

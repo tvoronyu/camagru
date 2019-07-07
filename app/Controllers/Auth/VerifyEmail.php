@@ -11,23 +11,17 @@ namespace App\Controllers\Auth;
 
 use App\Controllers\Controller;
 use App\Controllers\Misc\Misc;
+use App\Controllers\Misc\Request;
 use App\Model\Logic\DB;
 use App\Model\Orm\PreReg\PreReg;
+use App\Model\Orm\User\User;
 
 class VerifyEmail extends Controller
 {
-    public function verify(){
+    public function verify(Request $request){
 
-        $code = $this->request['ps'];
-
-        if (empty($code)){
-            header("Content-Type:application/json");
-            print json_encode([
-                "status" => 0,
-                "msg" => "Not found code"
-            ]);
-            return ;
-        }
+        if (empty($code = $request->get('ps')))
+            return ['status'=>0,'msg'=>"Not found code"];
 
         $wherePre = [
             'pre_unique_code' => $code,
@@ -35,26 +29,50 @@ class VerifyEmail extends Controller
             'pre_active' => 0
         ];
 
-//        Misc::trace((new DB())->table("pre_registration")->where($wherePre)->get());
+        if (empty($preReg = PreReg::get($wherePre)))
+            return ['status'=>0,'msg'=>"Not found code"];
 
-        $preReg = PreReg::get($wherePre);
+        if (isset($preReg[0]))
+            $preReg = (array)$preReg[0];
+        else
+            return ['status'=>0,'msg'=>"Not found code"];
 
-        if (empty($preReg)){
-            header("Content-Type:application/json");
-            print json_encode([
-                "status" => 0,
-                "msg" => "Not found code"
-            ]);
-            return ;
-        }
+        if (time() > $preReg['pre_expire'])
+            return ['status'=>0,'msg'=>"Code is expired"];
 
         $updatePre = [
-            'pre_active' => 1
+            'pre_active' => 1,
+            'pre_reg' => 0
         ];
 
+        $res = PreReg::update($updatePre, $wherePre);
+
+
+        $userId = $this->createUser($preReg);
+
+        header('location:/login');
+
+        return $this->middleResponse(['user_id'=>$userId]);
 
 
 
-        Misc::trace($preReg);
+        Misc::trace($userId);
+        Misc::trace2(0, $preReg, $res->queryString);
+    }
+
+
+    private function createUser($preReg){
+
+        $createUser = [
+            'user_name' => $preReg['pre_name'],
+            'user_sername' => $preReg['pre_sername'],
+            'user_pass_id' => $preReg['pre_pass_id'],
+            'user_email' => $preReg['pre_email']
+        ];
+
+        $userId = User::create($createUser);
+
+        return $userId;
+
     }
 }

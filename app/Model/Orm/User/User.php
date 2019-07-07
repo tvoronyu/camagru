@@ -32,14 +32,29 @@ class User extends Model implements UserInterface
     {
         // TODO: Implement get() method.
 
-        return (new DB())->table(self::$table)->where($where)->select("*")->get();
+        return (new DB())
+            ->table(self::$table)
+            ->where($where)
+            ->select("*")
+            ->get();
     }
 
     static public function create($data)
     {
         // TODO: Implement create() method.
 
-        return (new DB())->table(self::$table)->insert($data);
+        return (new DB())
+            ->table(self::$table)
+            ->insert($data);
+    }
+
+    static public function getUserByEmailAndPassword($where){
+        return (new DB())->select('*')
+            ->table(self::$table)
+            ->join('passwords', 'users.user_pass_id', '=', 'passwords.pass_id')
+            ->where($where)
+            ->limit(1)
+            ->get();
     }
 
 }

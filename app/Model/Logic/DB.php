@@ -18,6 +18,8 @@ class DB
     private $where;
     private $select;
     private $insert;
+    private $innerJoin;
+    private $update;
     private $limit;
     private $db_name;
     private $db_host;
@@ -46,6 +48,8 @@ class DB
             Misc::trace("No connect !");
         }
 
+        $this->innerJoin = "";
+
 //        try {
 //            $test = $this->PDO->query("SELECT * FROM users");
 //        }
@@ -56,6 +60,39 @@ class DB
 
 //        Misc::trace($this->PDO);
 
+    }
+
+    public function update($update){
+
+        $keys = array_keys($update);
+        $value = array_values($update);
+        $flag = 0;
+        $this->update = "";
+//        Misc::trace2(1, $update, $keys);
+        foreach ($keys as $key) {
+            if ($flag)
+                $this->update .= ", ";
+            $this->update .= "{$key}={$update[$key]}";
+            $flag = 1;
+        }
+
+        $query = "UPDATE {$this->table} SET {$this->update} WHERE {$this->where}";
+
+        try {
+            $result = $this->conn->query($query);
+        }
+        catch (\PDOException $exception){
+            Misc::trace($exception);
+        }
+
+        return $result;
+
+        Misc::trace($query);
+    }
+
+    public function join($table_name, $first, $operator, $second){
+        $this->innerJoin .= "INNER JOIN {$table_name} ON {$first}{$operator}{$second} ";
+        return $this;
     }
 
     public function table($table){
@@ -136,6 +173,9 @@ class DB
             $query .= "* ";
 
         $query .= "FROM $this->table ";
+
+        if (isset($this->innerJoin))
+            $query .= $this->innerJoin;
 
         if (isset($this->where))
             $query .= "WHERE $this->where";
