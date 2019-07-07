@@ -8,7 +8,6 @@
 
 namespace App\Model\Orm\Pass;
 
-
 use App\Interfaces\Main;
 use App\Model\Logic\DB;
 use App\Model\Model;

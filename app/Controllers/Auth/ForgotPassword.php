@@ -8,7 +8,6 @@
 
 namespace App\Controllers\Auth;
 
-
 use App\Controllers\Controller;
 use App\Controllers\Misc\Request;
 use App\Model\Orm\Pass\ResetPassword;
@@ -16,7 +15,8 @@ use App\Model\Orm\User\User;
 
 class ForgotPassword extends Controller
 {
-    public function forgotPassword(Request $request){
+    public function forgotPassword(Request $request)
+    {
 
         $email = $request->get('email');
 
@@ -43,7 +43,7 @@ class ForgotPassword extends Controller
 
         ResetPassword::create($createResPass);
 
-        $link = "http://".$_SERVER['SERVER_NAME']."/reset"."?ps=$uniqueCode";
+        $link = "http://" . $_SERVER['SERVER_NAME'] . "/reset" . "?ps=$uniqueCode";
 
         $html = "For reset your password, please go this link $link";
 
@@ -64,7 +64,8 @@ class ForgotPassword extends Controller
 
     }
 
-    public function forgotVerify(Request $request){
+    public function forgotVerify(Request $request)
+    {
 
     }
 }

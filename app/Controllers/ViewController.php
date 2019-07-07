@@ -17,5 +17,4 @@ class ViewController extends Controller
 
         header("Content-Type:text/html");
     }
-
 }

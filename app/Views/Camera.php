@@ -8,14 +8,14 @@
 
 namespace App\Views;
 
-
 use App\Controllers\Misc\Request;
 use App\Controllers\ViewController;
 
 class Camera extends ViewController
 {
 
-    public function getCamera(Request $request){
+    public function getCamera(Request $request)
+    {
 
         if (!$this->auth())
             header("location:/login");

@@ -50,16 +50,6 @@ class DB
 
         $this->innerJoin = "";
 
-//        try {
-//            $test = $this->PDO->query("SELECT * FROM users");
-//        }
-//        catch (\PDOException $PDOException){
-//
-//            exit(0);
-//        }
-
-//        Misc::trace($this->PDO);
-
     }
 
     public function update($update){
@@ -193,7 +183,6 @@ class DB
         else {
             $this->res = $res;
         }
-//        Misc::trace($res->fetch());
         return $this->res;
     }
 
@@ -216,31 +205,14 @@ class DB
             $flag = 1;
         }
         $query .= ")";
-//Misc::trace($query);
         return (bool)$this->conn->query($query);
     }
 
     private function connect(){
-//        Misc::trace("dddd");
-//        try {
-////            Misc::trace2(1, $this->db_name, $this->db_user, $this->db_host, $this->db_password);
-////            $this->PDO = new \PDO("mysql:host=$this->db_host;dbname=camagru",$this->db_user, $this->db_password);
-//            Misc::trace(new \PDO("mysql:host=$this->db_host;dbname=camagru",$this->db_user, $this->db_password));
-////            Misc::trace($this->PDO);
-//        }
-//        catch (\PDOException $PDOException){
-//            print_r($PDOException->getMessage());
-//            exit(0);
-//        }
 
         if (!isset($this->conn)) {
             try {
                 $this->conn = new \PDO("mysql:host=$this->db_host;dbname=$this->db_name", $this->db_user, $this->db_password);
-//            $res = $this->conn->query("SELECT * FROM users WHERE");
-//            Misc::trace2(0,$res->fetchObject());
-                // set the PDO error mode to exception
-//            $conn->setAttribute(\PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            echo "Connected successfully";
             } catch (\PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }

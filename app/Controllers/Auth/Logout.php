@@ -8,7 +8,6 @@
 
 namespace App\Controllers\Auth;
 
-
 use App\Controllers\Controller;
 use App\Controllers\Misc\Request;
 

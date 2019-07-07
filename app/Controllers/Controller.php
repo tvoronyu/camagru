@@ -56,16 +56,9 @@ class Controller extends FrontController
     }
 
     protected function sendEmail($to, $subject, $message){
-
-//        $to      = 'nobody@example.com';
-//        $subject = 'the subject';
-//        $message = 'hello';
         $headers = 'From: camagru@website.ua' . "\r\n" .
             'Reply-To: camagru@website.ua' . "\r\n" .
             'X-Mailer: PHP/' . phpversion();
-
         mail($to, $subject, $message, $headers);
-
-//        mail($to,$subject, $msg);
     }
 }

@@ -8,7 +8,6 @@
 
 namespace App\Views;
 
-
 use App\Controllers\Misc\Misc;
 use App\Controllers\ViewController;
 

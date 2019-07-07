@@ -39,7 +39,4 @@ class Request
             return $this->request[$key];
         return "";
     }
-
-
-
 }
