@@ -13,7 +13,7 @@ include_once ROOT . "/template/php/header.php";
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder=".....">
                 </div>
 <!--                <div class="form-group form-check">-->
 <!--                    <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
@@ -22,8 +22,8 @@ include_once ROOT . "/template/php/header.php";
                     <button  type="submit" id="submitBtn" class="btn btn-primary btn-block">Submit</button>
                     <br>
                     <div class="d-flex justify-content-between">
-                        <a href="/signup">SignUp</a>
-                        <a href="/">ForgotPassword</a>
+                        <a style="text-decoration-line: none" class="text-primary" href="signup">SignUp</a>
+                        <a style="text-decoration-line: none" href="/">ForgotPassword</a>
                     </div>
                 </div>
 <!--        </form>-->

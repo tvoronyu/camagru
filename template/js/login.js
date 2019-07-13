@@ -11,18 +11,28 @@ window.onload = function (event) {
 
         request.onreadystatechange = function () {
             if (request.readyState == '4' && request.status == '200'){
-                if (request.responseText == 'yes'){
-                    location = '/users';
+
+
+                let response = JSON.parse(request.responseText);
+
+                if (response.status == 1){
+                    location = '/camera';
                 }
-                else if (request.responseText == 'no'){
-                    alert('Error!');
+                else {
+                    alert(response.msg);
+                    password.value = ""
                 }
             }
         }
 
-        request.open('POST', '/login/valid');
-        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        request.send("email="+email.value+'&'+"password="+password.value);
+        let data = JSON.stringify({
+            'email':email.value,
+            'password':password.value
+        });
+
+        request.open('POST', '/login/verify');
+        request.setRequestHeader('Content-type', 'application/json');
+        request.send(data);
     }
 
 

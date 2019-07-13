@@ -17,7 +17,7 @@ class PreReg extends Model
 
     static public function update($update, $where)
     {
-        // TODO: Implement update() method.
+        return (new DB())->table(self::$table)->where($where)->update($update);
 //        return(new DB())->table("users")->drop();
 //        return(new DB())->table("users3")->createTable([
 //            'id' => 'int(11) AUTO_INCREMENT',

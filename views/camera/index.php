@@ -8,68 +8,47 @@
 
 include_once ROOT.'/template/php/header.php';
 ?>
-<?php if ($_SESSION['login'] == '')
-    header("location: /login");
-?>
-<div class="container h-100">
-    <div class="row h-100">
-        <div class="flex-column w-100">
-            <div class="container-fluid h-75">
-                <div class="row h-100">
-                    <div class="col d-flex justify-content-center align-items-center">
-                        <div class="flex-column">
-                            <div><video id="video" style="display: none; width: 1024px; height: 720px" src="" autoplay></video></div>
-                            <div>
-                                <img style="width: 300px; height: auto; margin: 10px" id="img-video" src="" alt="">
-                                <img style="width: 300px; height: auto;" src="/template/img/user.jpg" id="filter-image" alt="">
-<!--                                <video id="video_1" style="width: 640px; height: 480px" src="" autoplay></video></div>-->
-                            <div class="container">
-                                <div class="row">
-                                    <button id="button" class="btn btn-info btn-block">chees...</button>
-                                </div>
-                            </div>
-                            <div class="container">
-                                <div class="row">
-                                    <button id="newphoto" class="btn btn-success mt-2 btn-block">new photo</button>
-                                </div>
-                            </div>
-                                <div id="fountainTextG" style="position: absolute;display: none;">
-                                    <div id="fountainTextG_1" class="fountainTextG">З</div>
-                                    <div id="fountainTextG_2" class="fountainTextG">а</div>
-                                    <div id="fountainTextG_3" class="fountainTextG">г</div>
-                                    <div id="fountainTextG_4" class="fountainTextG">р</div>
-                                    <div id="fountainTextG_5" class="fountainTextG">у</div>
-                                    <div id="fountainTextG_6" class="fountainTextG">з</div>
-                                    <div id="fountainTextG_7" class="fountainTextG">к</div>
-                                    <div id="fountainTextG_8" class="fountainTextG">а</div>
-                                </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-            <div class="container-fluid h-25">
-                <div class="row h-100">
-                    <div class="col h-100">
-                        <div class="container-fluid h-100">
-                            <div class="row h-100">
-                                <div class="col d-flex justify-content-center align-items-center" style="margin: 0px;padding: 0px">
-                                    <img id="img-1" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                    <img id="img-2" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                    <img id="img-3" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                    <img id="img-4" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                    <img id="img-5" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                    <img id="img-6" style="width: 15%; height: auto" src="/template/img/user.jpg" class="rounded img-fluid img-thumbnail" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<style>
+
+
+
+</style>
+
+
+
+<div class="grid-container h-100">
+    <div class="item video m-1">
+        <video id="video" src="" width="100%"></video>
     </div>
+    <div id="canvas-container" class="item photo">
+        <canvas  class="w-100" id="canvas" style="display: block"></canvas>
+        <canvas  class="w-100" id="canvas2" style="display: none"></canvas>
+    </div>
+    <div class="item but1 d-flex justify-content-center align-content-center">
+        <button id="but1" class="btn btn-primary w-100 m-3">Make photo</button>
+    </div>
+    <div class="item but2 d-flex justify-content-center align-content-center">
+        <button class="btn btn-danger w-100 m-3">Clear photo</button>
+    </div>
+    <div class="item but3 d-flex justify-content-center align-content-center">
+        <button class="btn btn-info w-100 m-3">Save photo</button>
+    </div>
+    <div class="item but4 d-flex justify-content-center align-content-center">
+        <button class="btn btn-success w-100 m-3">Effect photo</button>
+    </div>
+    <div class="item download d-flex justify-content-center align-content-center m-3">
+        <form action="#">
+            <input type="file" class="btn btn-primary m-2" value="file">
+            <button type="submit" class="btn btn-success m-2 w-100">Download</button>
+        </form>
+    </div>
+    <div class="item gallery">
+        <img id="photo1" src="../../image.png" class="w-100" alt="">
+    </div>
+    <div class="footer d-flex justify-content-end">Camagru 2019</div>
 </div>
-<canvas id="canvas" style="display: none; width: 1024px;height: 720px;"></canvas>
+
 <script src="/template/js/camera.js" type="text/javascript"></script>
 <?php
 include_once ROOT.'/template/php/footer.php';

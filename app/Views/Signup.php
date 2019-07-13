@@ -8,11 +8,15 @@
 
 namespace App\Views;
 
+use App\Controllers\ViewController;
 
-class Signup
+class Signup extends ViewController
 {
     public function getSignup(){
 
-        include ROOT . "/views/signup/index.php";
+        if ($this->auth())
+            header("location:/camera");
+
+         include ROOT . "/views/signup/index.php";
     }
 }

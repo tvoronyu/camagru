@@ -18,6 +18,8 @@ class DB
     private $where;
     private $select;
     private $insert;
+    private $innerJoin;
+    private $update;
     private $limit;
     private $db_name;
     private $db_host;
@@ -46,16 +48,47 @@ class DB
             Misc::trace("No connect !");
         }
 
-//        try {
-//            $test = $this->PDO->query("SELECT * FROM users");
-//        }
-//        catch (\PDOException $PDOException){
-//
-//            exit(0);
-//        }
+        $this->innerJoin = "";
 
-//        Misc::trace($this->PDO);
+    }
 
+    public function update($update){
+
+        $keys = array_keys($update);
+        $value = array_values($update);
+        $flag = 0;
+        $this->update = "";
+//        Misc::trace2(1, $update, $keys);
+        foreach ($keys as $key) {
+            if ($flag)
+                $this->update .= ", ";
+            $this->update .= "{$key}='{$update[$key]}'";
+            $flag = 1;
+        }
+
+        if (isset($this->innerJoin)){
+            $query = "UPDATE {$this->table} {$this->innerJoin} SET {$this->update} WHERE {$this->where}";
+        }
+        else{
+            $query = "UPDATE {$this->table} SET {$this->update} WHERE {$this->where}";
+        }
+
+
+        try {
+            $result = $this->conn->query($query);
+        }
+        catch (\PDOException $exception){
+            Misc::trace($exception);
+        }
+//Misc::trace($query);
+        return $result;
+
+        Misc::trace($query);
+    }
+
+    public function join($table_name, $first, $operator, $second){
+        $this->innerJoin .= "INNER JOIN {$table_name} ON {$first}{$operator}{$second} ";
+        return $this;
     }
 
     public function table($table){
@@ -137,6 +170,9 @@ class DB
 
         $query .= "FROM $this->table ";
 
+        if (isset($this->innerJoin))
+            $query .= $this->innerJoin;
+
         if (isset($this->where))
             $query .= "WHERE $this->where";
 
@@ -153,7 +189,6 @@ class DB
         else {
             $this->res = $res;
         }
-//        Misc::trace($res->fetch());
         return $this->res;
     }
 
@@ -176,31 +211,14 @@ class DB
             $flag = 1;
         }
         $query .= ")";
-//Misc::trace($query);
         return (bool)$this->conn->query($query);
     }
 
     private function connect(){
-//        Misc::trace("dddd");
-//        try {
-////            Misc::trace2(1, $this->db_name, $this->db_user, $this->db_host, $this->db_password);
-////            $this->PDO = new \PDO("mysql:host=$this->db_host;dbname=camagru",$this->db_user, $this->db_password);
-//            Misc::trace(new \PDO("mysql:host=$this->db_host;dbname=camagru",$this->db_user, $this->db_password));
-////            Misc::trace($this->PDO);
-//        }
-//        catch (\PDOException $PDOException){
-//            print_r($PDOException->getMessage());
-//            exit(0);
-//        }
 
         if (!isset($this->conn)) {
             try {
                 $this->conn = new \PDO("mysql:host=$this->db_host;dbname=$this->db_name", $this->db_user, $this->db_password);
-//            $res = $this->conn->query("SELECT * FROM users WHERE");
-//            Misc::trace2(0,$res->fetchObject());
-                // set the PDO error mode to exception
-//            $conn->setAttribute(\PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            echo "Connected successfully";
             } catch (\PDOException $e) {
                 echo "Connection failed: " . $e->getMessage();
             }

@@ -8,8 +8,18 @@
 
 namespace App\Controllers\Auth;
 
+use App\Controllers\Controller;
+use App\Controllers\Misc\Request;
 
-class Logout
+class Logout extends Controller
 {
+    public function logout(Request $request){
 
+        if (!$this->auth())
+            header('location:/login');
+
+        unset($_SESSION['account']);
+
+        header('location:/login');
+    }
 }

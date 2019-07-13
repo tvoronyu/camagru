@@ -8,7 +8,6 @@ try {
 catch (\Exception $exception){
     exit(0);
 }
-
 //FRONT CONTROLLER
 
 //1. Общие настройки

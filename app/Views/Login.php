@@ -8,8 +8,17 @@
 
 namespace App\Views;
 
+use App\Controllers\Misc\Misc;
+use App\Controllers\ViewController;
 
-class Login
+class Login extends ViewController
 {
 
+    public function getLogin(){
+
+        if ($this->auth())
+            header("location:/camera");
+
+        include ROOT . "/views/login/index.php";
+    }
 }

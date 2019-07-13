@@ -9,7 +9,7 @@ namespace Components;
 
 use App\Controllers\Misc\Misc as app;
 use App\Controllers\Misc\Misc;
-use http\Header;
+use App\Controllers\Misc\Request;
 
 class Router
 {
@@ -87,8 +87,11 @@ class Router
             $obj = $this->getClassObject($fullNameSpace);
 
 
+            $request = new Request();
 
-            $obj->$methodName();
+            $result = $obj->$methodName($request);
+
+            $this->printResult($result);
 
         }
         else {
@@ -99,12 +102,48 @@ class Router
 
     private function getClassObject($fullNameSpace){
         $class = [
+
+            /**
+             * Controllers
+             */
+            /** ************************************************************************ */
+
             'App\Controllers\Auth\Signup' => \App\Controllers\Auth\Signup::class,
-            'App\Views\Signup' => \App\Views\Signup::class,
-            'App\Views\Landing' => \App\Views\Landing::class,
+            'App\Controllers\Auth\Login' => \App\Controllers\Auth\Login::class,
+            'App\Controllers\Auth\Logout' => \App\Controllers\Auth\Logout::class,
             'App\Controllers\Auth\VerifyEmail' => \App\Controllers\Auth\VerifyEmail::class,
+            'App\Controllers\Auth\ForgotPassword' => \App\Controllers\Auth\ForgotPassword::class,
+            'App\Controllers\User\User' => \App\Controllers\User\User::class,
+
+            'App\Controllers\Test\Test' => \App\Controllers\Test\Test::class,
+
+            /** ************************************************************************ */
+
+
+            /**
+             * Views
+             */
+            /** ************************************************************************ */
+
+            'App\Views\Signup' => \App\Views\Signup::class,
+            'App\Views\Login' => \App\Views\Login::class,
+            'App\Views\Landing' => \App\Views\Landing::class,
+            'App\Views\Camera' => \App\Views\Camera::class,
+            'App\Views\Profile' => \App\Views\Profile::class,
+            'App\Views\Gallery' => \App\Views\Gallery::class,
+
+            /** ************************************************************************ */
         ];
 
         return new $class[$fullNameSpace];
     }
+
+    private function printResult($result){
+        if (is_array($result)) {
+            print \json_encode($result);
+        }
+        else
+            print $result;
+    }
+
 }

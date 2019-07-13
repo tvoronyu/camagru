@@ -8,10 +8,11 @@
 
 namespace App;
 
+use App\Controllers\Misc\Request;
+
 class FrontController
 {
     public function __construct()
     {
-        print_r("fdfddfdff");
     }
 }

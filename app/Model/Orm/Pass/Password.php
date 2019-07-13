@@ -40,4 +40,11 @@ class Password extends Model
         return (new DB())->table(self::$table)->insert($data);
     }
 
+    static public function updatePassword($where, $update){
+        return (new DB())->table(self::$table)
+            ->join('users', self::$table.'.pass_id','=','users.user_pass_id')
+            ->where($where)
+            ->update($update);
+    }
+
 }

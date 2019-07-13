@@ -8,10 +8,15 @@
 
 namespace App\Views;
 
+use App\Controllers\ViewController;
 
-class Landing
+class Landing extends ViewController
 {
     public function getLanding(){
+
+        if ($this->auth())
+            header("location:/camera");
+
         include ROOT . "/views/main/index.php";
     }
 }

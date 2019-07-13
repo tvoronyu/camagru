@@ -7,40 +7,113 @@
  */
 include_once ROOT.'/template/php/header.php';
 ?>
-<?php if ($_SESSION['login'] == '')
-    header("location: /login");
-?>
-<div class="container h-100">
-    <div class="row h-100">
-        <div class="col-5">
-            <div class="border">
-                <div class="pt-3">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <?php if ($var['pic_user']) : ?>
-                                    <img src="<?php echo $var['pic_user'] ?>" alt="photo">
-                                <?php endif; ?>
-                                <?php if ($var['pic_user'] == '') : ?>
-                                    <img src="http://media.pn.am/media/issue/197/297/photo/197297.jpg" alt="photo">
-                                <?php endif; ?>
-                            </div>
-                            <?php if ($_SESSION['id'] == $var['id_user']) :?>
-                            <div class="col">
-                                <a>New photo</a>
-                            </div>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-column p-3">
-                    <div class="w-100"><span style="font-family: cursive; font-size: 30px"><?php echo $var['name_user']?></span></div>
-                    <div><span style="font-family: cursive; font-size: 30px"><?php echo $var['sename_user']?></span></div>
-                </div>
+
+<style>
+
+    @media screen and (min-width: 1400px) {
+        .photo_profile{
+            grid-column-start: 2;
+            grid-column-end: 9;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+
+        .main_info{
+            grid-column-start: 10;
+            grid-column-end: 17;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+
+        .edit_password{
+            grid-column-start: 18;
+            grid-column-end: 24;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+
+        .width{
+            width: 75%;
+
+            padding: 5px;
+        }
+    }
+
+    @media screen and (min-width: 900px) {
+        .photo_profile{
+            grid-column-start: 2;
+            grid-column-end: 9;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+
+        .main_info{
+            grid-column-start: 10;
+            grid-column-end: 17;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+
+        .edit_password{
+            grid-column-start: 18;
+            grid-column-end: 24;
+            grid-row-start: 3;
+            grid-row-end: 3;
+        }
+    }
+
+</style>
+
+<div class="grid-container h-100 w-100">
+    <div class="photo_profile w-100 h-100">
+        <img class="w-100" style="border-radius: 10%" src="../../image.png" alt="">
+    </div>
+    <div class="main_info m-4">
+        <div class="pr-5 pl-5 pt-5">
+            <div><input id="inputName" class="inputName width" disabled type="text" value="<?php print $_SESSION['account']['user_name']?>" style="border-radius: 10%"> <img id="inputNameEdit" style="margin-top: -40px" width="30px" src="http://s1.iconbird.com/ico/0912/ToolbarIcons/w256h2561346685464Edit.png" alt=""></div>
+            <div class="w-100 pt-2">
+                <button id="btnName" class="btn btn-primary width disabled">Save</button>
             </div>
+        </div>
+        <div class="pr-5 pl-5 pt-5">
+            <div><input id="inputSerName" class="inputSername width" disabled type="text" value="<?php print $_SESSION['account']['user_sername']?>" style="border-radius: 10%"> <img id="inputSerNameEdit" style="margin-top: -40px" width="30px" src="http://s1.iconbird.com/ico/0912/ToolbarIcons/w256h2561346685464Edit.png" alt=""></div>
+            <div class="w-100 pt-2">
+                <button id="btnSerName" class="btn btn-primary width disabled">Save</button>
+            </div>
+        </div>
+        <div class="pr-5 pl-5 pt-5">
+            <div><input id="inputEmail" class="inputEmail width" disabled type="text" value="<?php print $_SESSION['account']['user_email']?>" style="border-radius: 10%"><img id="inputEmailEdit" style="margin-top: -40px" width="30px" src="http://s1.iconbird.com/ico/0912/ToolbarIcons/w256h2561346685464Edit.png" alt=""></div>
+            <div class="w-100 pt-2">
+                <button id="btnEmail" class="btn btn-primary width disabled">Save</button>
+            </div>
+        </div>
+        <div class="pr-5 pl-5 pt-5">
+            <?php if($_SESSION['account']['user_notification']){
+                print "<input id=\"checkbox\" checked=\"checked\" class=\"checkbox\" type=\"checkbox\" value=\"fefe\"> <input disabled  type=\"text\" value=\"Notification by email\">";
+            };?>
+            <?php if(!$_SESSION['account']['user_notification']){
+                print "<input id=\"checkbox\" class=\"checkbox\" type=\"checkbox\" value=\"fefe\"> <input disabled  type=\"text\" value=\"Notification by email\">";
+            };?>
+        </div>
+    </div>
+    <div class="edit_password w-100 h-100  m-4">
+        <div class="pl-5 pr-5 pt-5 d-flex justify-content-center">
+            <strong class="text-success"> Edit Password</strong>
+        </div>
+        <div class="p-5 d-flex justify-content-center">
+            <input id="oldPass" class="w-75" type="password" placeholder="old password">
+        </div>
+        <div class="p-5 d-flex justify-content-center">
+            <input id="newPass" class="w-75" type="password" placeholder="new password">
+        </div>
+        <div class="p-5 d-flex justify-content-center">
+            <button id="btnPass" class="btn btn-primary">Edit Password</button>
         </div>
     </div>
 </div>
+
+<script type="application/javascript" src="../../template/js/profile.js"></script>
+
 
 <?php
 include_once ROOT.'/template/php/footer.php';

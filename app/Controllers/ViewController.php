@@ -9,7 +9,15 @@
 namespace App\Controllers;
 
 
-class ViewController
-{
+use App\Controllers\Auth\Auth;
+use App\Controllers\Misc\Request;
 
+class ViewController extends Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+
+        header("Content-Type:text/html");
+    }
 }

@@ -1,4 +1,4 @@
-AddDefaultCharset utf-8
+#AddDefaultCharset utf-8
 
 #RewriteEngine on
 #RewriteBase /
@@ -12,8 +12,9 @@ AddDefaultCharset utf-8
 	RewriteEngine on
 #	RewriteEngine On
     RewriteCond %{HTTPS} !=on
+#    DirectoryIndex index.php
 #    RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
 
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^(.*)$ index.php/$1 [L]
+	RewriteRule ^(.*)$ index.php [L]
 </IfModule>

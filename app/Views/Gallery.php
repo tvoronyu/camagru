@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: taras
- * Date: 2019-07-06
- * Time: 14:41
+ * Date: 2019-07-12
+ * Time: 15:01
  */
 
 namespace App\Views;
@@ -11,15 +11,14 @@ namespace App\Views;
 use App\Controllers\Misc\Request;
 use App\Controllers\ViewController;
 
-class Camera extends ViewController
+class Gallery extends ViewController
 {
-
-    public function getCamera(Request $request)
+    public function getGallery(Request $request)
     {
 
         if (!$this->auth())
             header("location:/login");
 
-        include ROOT . "/views/camera/index.php";
+        include ROOT . "/views/gallery/index.php";
     }
 }
