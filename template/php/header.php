@@ -23,11 +23,12 @@
     <ul class="navbar-nav">
 
         <?php if (!isset($_SESSION['account'])) :?>
+            <li class="nav-item"><a href="gallery" class="nav-link">Gallery</a></li>
             <li class="nav-item"><a href="login" class="nav-link">Login</a></li>
             <li class="nav-item"><a href="signup" class="nav-link">SignUp</a></li>
         <?php elseif (isset($_SESSION['account'])) :?>
             <li class="nav-item"><a href="gallery" class="nav-link">Gallery</a></li>
-            <li class="nav-item"><a href="my_gallery" class="nav-link">My Gallery</a></li>
+            <li class="nav-item"><a href="myGallery" class="nav-link">My Gallery</a></li>
             <li class="nav-item"><a href="profile" class="nav-link">My Profile</a></li>
             <li class="nav-item"><a href="logout" class="nav-link">Logout</a></li>
         <?php endif; ?>

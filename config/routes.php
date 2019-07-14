@@ -19,17 +19,18 @@ return array(
          */
         /** *********************************************** */
 
-        'signup/verify'     => 'POST|Controllers/Auth/Signup@signup',
-        'activate'          => 'GET|Controllers/Auth/VerifyEmail@verify',
-        'login/verify'      => 'POST|Controllers/Auth/Login@login',
-        'logout'            => 'GET|Controllers/Auth/Logout@logout',
-        'forgot/verify'     => 'POST|Controllers/Auth/ForgotPassword@forgotPassword',
-        'user/changeName'     => 'POST|Controllers/User/User@changeName',
-        'user/changeSerName'     => 'POST|Controllers/User/User@changeSerName',
-        'user/changeEmail'     => 'POST|Controllers/User/User@changeEmail',
+        'signup/verify'         => 'POST|Controllers/Auth/Signup@signup',
+        'activate'              => 'GET|Controllers/Auth/VerifyEmail@verify',
+        'login/verify'          => 'POST|Controllers/Auth/Login@login',
+        'logout'                => 'GET|Controllers/Auth/Logout@logout',
+        'forgot/verify'         => 'POST|Controllers/Auth/ForgotPassword@forgotPassword',
+        'user/changeName'       => 'POST|Controllers/User/User@changeName',
+        'user/changeSerName'    => 'POST|Controllers/User/User@changeSerName',
+        'user/changeEmail'      => 'POST|Controllers/User/User@changeEmail',
         'user/notification'     => 'POST|Controllers/User/User@changeNotification',
-        'user/changePassword'     => 'POST|Controllers/User/User@changePassword',
-        'test'     => 'POST|Controllers/Test/Test@test',
+        'user/changePassword'   => 'POST|Controllers/User/User@changePassword',
+        'camera/save'           => 'POST|Controllers/Camera/Camera@savePhoto',
+        'test'                  => 'POST|Controllers/Test/Test@test',
 
         /** *********************************************** */
 
@@ -44,6 +45,7 @@ return array(
         'camera'            => 'GET|Views/Camera@getCamera',
         'profile'           => 'GET|Views/Profile@getProfile',
         'gallery'           => 'GET|Views/Gallery@getGallery',
+        'myGallery'         => 'GET|Views/Gallery@getMyGallery',
         'forgot'            => 'GET|Views/ForgotPassowrd@getForgot',
         ''                  => 'GET|Views/Landing@getLanding',
 

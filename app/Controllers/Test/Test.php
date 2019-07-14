@@ -24,7 +24,7 @@ class Test extends Controller
 
         $image = preg_replace("~data:image/jpeg;base64,~","", $image);
 
-//        Misc::trace($image);
+        Misc::trace($image);
 
         $image = base64_decode($image);
 

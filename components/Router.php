@@ -114,6 +114,7 @@ class Router
             'App\Controllers\Auth\VerifyEmail' => \App\Controllers\Auth\VerifyEmail::class,
             'App\Controllers\Auth\ForgotPassword' => \App\Controllers\Auth\ForgotPassword::class,
             'App\Controllers\User\User' => \App\Controllers\User\User::class,
+            'App\Controllers\Camera\Camera' => \App\Controllers\Camera\Camera::class,
 
             'App\Controllers\Test\Test' => \App\Controllers\Test\Test::class,
 

@@ -18,6 +18,7 @@ class DB
     private $where;
     private $select;
     private $insert;
+    private $sortBy;
     private $innerJoin;
     private $update;
     private $limit;
@@ -176,6 +177,9 @@ class DB
         if (isset($this->where))
             $query .= "WHERE $this->where";
 
+        if (isset($this->sortBy))
+            $query .= $this->sortBy;
+
         if (isset($this->limit))
             $query .= "LIMIT $this->limit";
 
@@ -194,6 +198,11 @@ class DB
 
     public function limit($limit){
         $this->limit = $limit;
+        return $this;
+    }
+
+    public function sortBy($column, $order){
+        $this->sortBy = "ORDER BY $column $order ";
         return $this;
     }
 
