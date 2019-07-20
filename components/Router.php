@@ -8,7 +8,6 @@
 namespace Components;
 
 use App\Controllers\Misc\Misc as app;
-use App\Controllers\Misc\Misc;
 use App\Controllers\Misc\Request;
 
 class Router
@@ -115,6 +114,8 @@ class Router
             'App\Controllers\Auth\ForgotPassword' => \App\Controllers\Auth\ForgotPassword::class,
             'App\Controllers\User\User' => \App\Controllers\User\User::class,
             'App\Controllers\Camera\Camera' => \App\Controllers\Camera\Camera::class,
+            'App\Controllers\Gallery\Like' => \App\Controllers\Gallery\Like::class,
+            'App\Controllers\Gallery\Comment' => \App\Controllers\Gallery\Comment::class,
 
             'App\Controllers\Test\Test' => \App\Controllers\Test\Test::class,
 

@@ -50,13 +50,17 @@ include_once ROOT.'/template/php/header.php';
         /*background: #606061;*/
         color: #FFFFFF;
         line-height: 25px;5
-    position: absolute;
+        position: absolute;
         right: -12px;
         text-align: center;
         top: -10px;
         width: 24px;
         text-decoration: none;
         font-weight: bold;
+        grid-column-start: 12;
+        grid-column-end: 12;
+        grid-row-start: 1;
+        grid-row-end: 1;
         /*-webkit-border-radius: 12px;*/
         /*-moz-border-radius: 12px;*/
         /*border-radius: 12px;*/
@@ -73,37 +77,75 @@ include_once ROOT.'/template/php/header.php';
 
     }
 
+    .modal-photo{
+        grid-column-start: 5;
+        grid-column-end: 9;
+        grid-row-start: 1;
+        grid-row-end: 1;
+    }
+
+    .modal-comment{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 2;
+        grid-row-end: 2;
+    }
+
+    .modal-textarea{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 3;
+        grid-row-end: 3;
+    }
+
+    .modal-btn-send{
+        grid-column-start: 1;
+        grid-column-end: 13;
+        grid-row-start: 4;
+        grid-row-end: 4;
+    }
+
+    .close:hover {
+        /*background: red;*/
+    }
+
+    .grid-gallery-modal{
+        display: grid;
+        grid-template-rows: 150px 1fr 100px 50px;
+        grid-template-columns: repeat(12, 1fr);
+    }
+
 
 </style>
 
 
-
 <div class="container-fluid w-100 h-100" id="gallery">
-        <?php foreach ($photos as $photo) :?>
-            <div class="p-1 m-2" style="float: left; text-align: center; width: 450px; height: 400px;border: cornsilk 2px solid">
-                <img src="/PhotoUsers/<?php print $photo->photo_name;?>" class="w-75 h-75 m-2" alt="">
-                <?php if (isset($_SESSION['account'])) :?>
-                    <div class="d-flex justify-content-around">
-                        <a id="like" class="<?php print $photo->photo_name;?>" style="font-size: 40px; color: red; cursor:pointer;">&#128153</a>
-                        <a id="comment" class="<?php print $photo->photo_name;?>" style="font-size: 40px;cursor: pointer">&#128172</a>
-                    </div>
-                <?php endif; ?>
-            </div>
-        <?php endforeach;?>
+    <?php foreach ($photos as $photo) :?>
+        <div class="p-1 m-2" style="float: left; text-align: center; width: 450px; height: 400px;border: cornsilk 2px solid">
+            <img src="/PhotoUsers/<?php print $photo['photo_name'];?>" class="w-75 h-75 m-2" alt="">
+            <?php if (isset($_SESSION['account'])) :?>
+                <div class="d-flex justify-content-around align-content-center">
+                    <a id="like" class="<?php print $photo['photo_name'];?> far fa-heart pt-2" style="font-size: 40px; color: red; cursor:pointer;"><span><?php if ($photo['like'] != 0)print $photo['like']?></span></a>
+                    <a id="comment" class="<?php print $photo['photo_name'];?>" style="font-size: 40px;cursor: pointer">&#128172</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endforeach;?>
 </div>
 
 <div id="openModal" class="modalDialog">
-    <div class="">
-        <a href="#close" title="Закрыть" class="close">&#10060</a>
-        <div style="text-align: center" class="p-4">
+    <div class="grid-gallery-modal">
+        <a href="#close" title="Close" class="close m-2 ml-5">&#10060</a>
+        <div style="text-align: center" class="p-4 modal-photo">
             <img id="modalPhoto" class="" style="width: 150px; height: 100px;" src="" alt="">
         </div>
-        <div style="overflow: hidden; word-wrap: break-spaces">fjdskfj dsjhf jkdsh kjghdjkgh jkhdf hfdkjg hkjhfdk ghkfdh gkdfhgk hfdkg fkdghk jf</div>
-        <div class="h-100">
-
-        <textarea style="width: 100%; position: relative;" name="" id="" cols="30" rows="2"></textarea>
-        <button class="btn btn-info">send</button>
+        <div class="modal-comment" style="overflow: hidden; word-wrap: break-spaces">
+            <!-- тут мають js-кою додаватись коменти -->
         </div>
+        <div class="h-100 modal-textarea">
+            <textarea style="width: 100%; position: relative; resize: none" name="" id="" cols="30" rows="3"></textarea>
+        </div>
+        <button class="btn btn-info modal-btn-send">send</button>
 
     </div>
 </div>

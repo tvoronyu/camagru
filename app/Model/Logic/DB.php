@@ -82,6 +82,7 @@ class DB
             Misc::trace($exception);
         }
 //Misc::trace($query);
+
         return $result;
 
         Misc::trace($query);
@@ -89,6 +90,11 @@ class DB
 
     public function join($table_name, $first, $operator, $second){
         $this->innerJoin .= "INNER JOIN {$table_name} ON {$first}{$operator}{$second} ";
+        return $this;
+    }
+
+    public function leftJoin($table_name, $first, $operator, $second){
+        $this->innerJoin .= "LEFT JOIN {$table_name} ON {$first}{$operator}{$second} ";
         return $this;
     }
 
@@ -184,7 +190,7 @@ class DB
             $query .= "LIMIT $this->limit";
 
         $res = $this->conn->query($query);
-//Misc::trace($query);
+//Misc::trace($query, false);
 //Misc::trace($res);
 //Misc::trace(get_class_methods($res));
         if (!empty($res)) {
@@ -202,7 +208,7 @@ class DB
     }
 
     public function sortBy($column, $order){
-        $this->sortBy = "ORDER BY $column $order ";
+        $this->sortBy = " ORDER BY $column $order ";
         return $this;
     }
 

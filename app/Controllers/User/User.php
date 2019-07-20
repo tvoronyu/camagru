@@ -8,6 +8,7 @@ use App\Controllers\Controller;
 use App\Controllers\Misc\Misc;
 use App\Controllers\Misc\Request;
 use App\Model\Logic\DB;
+use App\Model\Orm\Comment\Comment;
 use App\Model\Orm\Pass\Password;
 
 class User extends Controller
@@ -23,8 +24,24 @@ class User extends Controller
             'user_id' => $_SESSION['account']['user_id']
         ];
 
-        if ((new DB())->table('users')->where($where)->update($update))
-            return $this->middleResponse($request->all());
+        (new DB())->table('users')->where($where)->update($update);
+
+        $user = \App\Model\Orm\User\User::get(['user_id' => $_SESSION['account']['user_id'], 'user_del' => 0]);
+
+        if (empty($user))
+            return ['status' => 0, 'msg' => 'User is not exist'];
+
+        $user = (array)$user[0];
+
+        $whereComment = [
+            'cm_user_id' => $_SESSION['account']['user_id']
+        ];
+
+        $updateComment = [
+            'cm_user_name' =>$user['user_name']
+        ];
+
+        Comment::updateComment($updateComment, $whereComment);
 
         return $this->middleResponse(['status' => 0, 'msg'=>'fail']);
 

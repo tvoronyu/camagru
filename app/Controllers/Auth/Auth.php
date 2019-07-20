@@ -11,7 +11,7 @@ use App\Model\Orm\User\User;
 
 class Auth extends Controller
 {
-    public function auth(Request $request){
+    public function auth2(Request $request){
 
         if (isset($_SESSION['account'])) {
             $whereUser = [
@@ -30,6 +30,8 @@ class Auth extends Controller
         else{
             return ['status' => 0, 'msg' => 'User is not exist'];
         }
+
+        return ['status' => 1];
 
     }
 }

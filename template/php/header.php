@@ -14,6 +14,7 @@
 <!--    <link rel="stylesheet" href="/css/style/style.css" type="text/css">-->
     <link rel="stylesheet" href="/css/style/style2.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
 </head>
 <body style="height: calc(100vh - 56px);background-color: #435292">
 <nav class="navbar navbar-expand bg-dark d-flex justify-content-between">
@@ -27,6 +28,7 @@
             <li class="nav-item"><a href="login" class="nav-link">Login</a></li>
             <li class="nav-item"><a href="signup" class="nav-link">SignUp</a></li>
         <?php elseif (isset($_SESSION['account'])) :?>
+            <li class="nav-item"><a href="camera" class="nav-link">Camera</a></li>
             <li class="nav-item"><a href="gallery" class="nav-link">Gallery</a></li>
             <li class="nav-item"><a href="myGallery" class="nav-link">My Gallery</a></li>
             <li class="nav-item"><a href="profile" class="nav-link">My Profile</a></li>

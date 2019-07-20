@@ -11,6 +11,10 @@ include_once ROOT.'/template/php/header.php';
 
 <style>
 
+
+
+
+
     .modalDialog {
         position: fixed;
         font-family: Arial, Helvetica, sans-serif;

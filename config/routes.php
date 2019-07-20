@@ -30,6 +30,9 @@ return array(
         'user/notification'     => 'POST|Controllers/User/User@changeNotification',
         'user/changePassword'   => 'POST|Controllers/User/User@changePassword',
         'camera/save'           => 'POST|Controllers/Camera/Camera@savePhoto',
+        'gallery/setLike'       => 'POST|Controllers/Gallery/Like@setLike',
+        'gallery/setComment'    => 'POST|Controllers/Gallery/Comment@setComment',
+        'gallery/getComment'    => 'POST|Controllers/Gallery/Comment@getComment',
         'test'                  => 'POST|Controllers/Test/Test@test',
 
         /** *********************************************** */

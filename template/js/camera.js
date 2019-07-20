@@ -71,7 +71,7 @@ document.getElementById('btnSave').addEventListener('click', function (e) {
 
         img.className = "w-100 pb-1";
 
-        gallery.appendChild(img);
+        gallery.insertBefore(img, gallery.firstChild);
     }
 
 
@@ -117,7 +117,7 @@ gallery.addEventListener('click', function (e) {
 
     if (e.srcElement.localName === "img") {
 
-        var elem = document.createElement('div');
+        // var elem = document.createElement('div');
         //
         // elem.style.backgroundColor = "white";
         // elem.style.position = "fixed";
